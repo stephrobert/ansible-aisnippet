@@ -32,6 +32,7 @@ jobs:
       env:
         POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
       run: |
+        echo ${POETRY_PYPI_TOKEN_PYPI}
         poetry build
         poetry publish --skip-existing
     - name: Git tag
