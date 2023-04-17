@@ -31,8 +31,8 @@ jobs:
     - name: Publish package
       env:
         POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
-        user: __token__
-        password: ${{ secrets.PYPI_TOKEN }}
+        POETRY_HTTP_BASIC_TESTPYPI_USERNAME: __token__
+        POETRY_HTTP_BASIC_TESTPYPI_PASSWORD: ${{ secrets.PYPI_TOKEN }}
       run: |
         poetry build
         poetry publish --skip-existing
