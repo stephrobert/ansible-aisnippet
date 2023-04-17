@@ -16,7 +16,7 @@ ansible-aisnippet = "ansible_aisnippet.main:app"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-typer = {extras = ["all"], version = "^0.6.1"}
+typer = {extras = ["all"], version = "^0.7.0"}
 Jinja2 = "^3.1.2"
 "ruamel.yaml" = "^0.17.21"
 rich = "^12.6.0"
