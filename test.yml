@@ -1,0 +1,10 @@
+- task: Install package htop, nginx and net-tools with generic module
+- task: Copy file from local file /tmp/toto to remote /tmp/titi set mode 0666 owner bob group www
+  register: test
+- name: A block
+  when: test.rc == 0
+  block:
+    - task: wait for port 6300 on localhost timeout 25
+  rescue:
+    - task: Execute command /opt/application/start.sh creates /var/run/test.lock
+- task: Download file from https://tmp.io/test/ set mode 0640 and force true

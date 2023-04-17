@@ -1,0 +1,1372 @@
+{
+    "add new hosts and groups in inventory": {
+        "tasks": [
+            {
+                "name": "Add a host (and alternatively a group) to the ansible-playbook in-memory inventory",
+                "ansible.builtin.add_host": {
+                    "groups": [
+                        "element"
+                    ],
+                    "name": "group"
+                }
+            }
+        ]
+    },
+    "Install upgrade remove and list apt packages": {
+        "tasks": [
+            {
+                "name": "Manages apt-packages",
+                "ansible.builtin.apt": {
+                    "allow_downgrade": false,
+                    "allow_unauthenticated": false,
+                    "autoclean": false,
+                    "autoremove": false,
+                    "force": false,
+                    "install_recommends": false,
+                    "name": [
+                        "element"
+                    ],
+                    "state": "present",
+                    "update_cache": true
+                }
+            }
+        ]
+    },
+    "add remove download apt key": {
+        "tasks": [
+            {
+                "name": "Add or remove an apt key",
+                "ansible.builtin.apt_key": {
+                    "file": "/tmp/apt.gpg",
+                    "id": "9FED2BCBDCD29CDF762678CBAED4B06F473041FA",
+                    "keyring": "/etc/apt/trusted.gpg.d/debian.gpg",
+                    "keyserver": "keyserver.ubuntu.com",
+                    "state": "present",
+                    "url": "https://ftp-master.debian.org/keys/archive-key-6.0.asc",
+                    "validate_certs": true
+                }
+            }
+        ]
+    },
+    "add remove apt repository": {
+        "tasks": [
+            {
+                "name": "Add and remove APT repositories",
+                "ansible.builtin.apt_repository": {
+                    "codename": "jammy",
+                    "filename": "google-chrome",
+                    "repo": "ppa:nginx/stable",
+                    "state": "present",
+                    "update_cache": true,
+                    "validate_certs": true
+                }
+            }
+        ]
+    },
+    "Assemble configuration files from fragments": {
+        "tasks": [
+            {
+                "name": "Assemble configuration files from fragments",
+                "ansible.builtin.assemble": {
+                    "backup": false,
+                    "decrypt": true,
+                    "dest": "/etc/ssh/sshd_config",
+                    "group": "group",
+                    "ignore_hidden": false,
+                    "mode": "0755",
+                    "owner": "user",
+                    "remote_src": true,
+                    "src": "/etc/ssh/conf.d/",
+                    "validate": "/usr/sbin/sshd -t -f %s"
+                }
+            }
+        ]
+    },
+    "assert given expression are true": {
+        "tasks": [
+            {
+                "name": "Asserts given expressions are true",
+                "ansible.builtin.assert": {
+                    "fail_msg": "'my_param' must be between 0 and 100",
+                    "quiet": false,
+                    "success_msg": "'my_param' is between 0 and 100",
+                    "that": [
+                        "element"
+                    ]
+                }
+            }
+        ]
+    },
+    "get the status of an asynchronous task": {
+        "tasks": [
+            {
+                "name": "Obtain status of asynchronous task",
+                "ansible.builtin.async_status": {
+                    "jid": "string",
+                    "mode": "status"
+                }
+            }
+        ]
+    },
+    "add insert update remove block multi line text in file": {
+        "tasks": [
+            {
+                "name": "Insert/update/remove a text block surrounded by marker lines",
+                "ansible.builtin.blockinfile": {
+                    "backup": false,
+                    "block": "",
+                    "create": false,
+                    "group": "group",
+                    "insertafter": "EOF",
+                    "insertbefore": "string",
+                    "marker": "# {mark} ANSIBLE MANAGED BLOCK",
+                    "mode": "0755",
+                    "owner": "user",
+                    "path": "/etc/ssh/sshd_config",
+                    "state": "present",
+                    "unsafe_writes": false,
+                    "validate": "/usr/sbin/sshd -T -f %s"
+                }
+            }
+        ]
+    },
+    "execute command on remote node create remove lock": {
+        "tasks": [
+            {
+                "name": "Execute commands on targets",
+                "ansible.builtin.command": {
+                    "chdir": "/tmp/test",
+                    "cmd": "/usr/bin/make_database.sh db_user db_name",
+                    "creates": "/var/run/test.lock",
+                    "removes": "/var/run/test.lock"
+                }
+            }
+        ]
+    },
+    "copy file from source on remote": {
+        "tasks": [
+            {
+                "name": "Copy files to remote locations",
+                "ansible.builtin.copy": {
+                    "backup": false,
+                    "dest": "/tmp/test",
+                    "follow": false,
+                    "force": true,
+                    "group": "group",
+                    "mode": "0755",
+                    "owner": "user",
+                    "remote_src": false,
+                    "src": "/tmp/test",
+                    "unsafe_writes": false
+                }
+            }
+        ]
+    },
+    "add schedule job on crontab": {
+        "tasks": [
+            {
+                "name": "Manage cron.d and crontab entries",
+                "ansible.builtin.cron": {
+                    "backup": false,
+                    "cron_file": "\"ansible_yum-autoupdate\"",
+                    "day": "*",
+                    "disabled": false,
+                    "hour": "*",
+                    "insertafter": "string",
+                    "insertbefore": "string",
+                    "job": "\"YUMINTERACTIVE=0 /usr/sbin/yum-autoupdate\"",
+                    "minute": "*",
+                    "month": "*",
+                    "name": "yum autoupdate",
+                    "state": "present",
+                    "user": "root",
+                    "weekday": "*"
+                }
+            }
+        ]
+    },
+    "configure debian hosts": {
+        "tasks": [
+            {
+                "name": "Configure a .deb package",
+                "ansible.builtin.debconf": {
+                    "name": "locales",
+                    "question": "locales/default_environment_locale",
+                    "value": "fr_FR.UTF-8",
+                    "vtype": "select"
+                }
+            }
+        ]
+    },
+    "display variables for debug play": {
+        "tasks": [
+            {
+                "name": "Print statements during execution",
+                "ansible.builtin.debug": {
+                    "msg": "Hello world!",
+                    "verbosity": "0"
+                }
+            }
+        ]
+    },
+    "install upgrade remove and list packages and groups with dnf": {
+        "tasks": [
+            {
+                "name": "Manages packages with the dnf package manager",
+                "ansible.builtin.dnf": {
+                    "allow_downgrade": false,
+                    "allowerasing": false,
+                    "autoremove": false,
+                    "bugfix": false,
+                    "cacheonly": false,
+                    "conf_file": "string",
+                    "disable_excludes": "string",
+                    "disable_gpg_check": false,
+                    "disable_plugin": [
+                        "element"
+                    ],
+                    "disablerepo": [
+                        "element"
+                    ],
+                    "download_dir": "string",
+                    "download_only": false,
+                    "enable_plugin": [
+                        "element"
+                    ],
+                    "enablerepo": [
+                        "element"
+                    ],
+                    "exclude": [
+                        "element"
+                    ],
+                    "install_repoquery": true,
+                    "install_weak_deps": true,
+                    "installroot": "/",
+                    "list": "string",
+                    "lock_timeout": "30",
+                    "name": [
+                        "element"
+                    ],
+                    "nobest": false,
+                    "releasever": "string",
+                    "security": false,
+                    "skip_broken": false,
+                    "sslverify": true,
+                    "state": "string",
+                    "update_cache": false,
+                    "update_only": false,
+                    "validate_certs": true
+                }
+            }
+        ]
+    },
+    "change dpkg package selection": {
+        "tasks": [
+            {
+                "name": "Dpkg package selection selections",
+                "ansible.builtin.dpkg_selections": {
+                    "name": "string",
+                    "selection": "string"
+                }
+            }
+        ]
+    },
+    "execute a command and respond to prompt": {
+        "tasks": [
+            {
+                "name": "Executes a command and responds to prompts",
+                "ansible.builtin.expect": {
+                    "chdir": "/tmp/test",
+                    "command": "string",
+                    "creates": "/tmp/test",
+                    "echo": false,
+                    "removes": "/tmp/test",
+                    "responses": "value",
+                    "timeout": "30"
+                }
+            }
+        ]
+    },
+    "fail with custom message": {
+        "tasks": [
+            {
+                "name": "Fail with custom message",
+                "ansible.builtin.fail": {
+                    "msg": "Failed as requested from task"
+                }
+            }
+        ]
+    },
+    "Fetch file from remote node": {
+        "tasks": [
+            {
+                "name": "Fetch files from remote nodes",
+                "ansible.builtin.fetch": {
+                    "dest": "value",
+                    "fail_on_missing": true,
+                    "flat": false,
+                    "src": "value",
+                    "validate_checksum": true
+                }
+            }
+        ]
+    },
+    "create delete remove set attributes on file directory symlink": {
+        "tasks": [
+            {
+                "name": "Manage files and file properties",
+                "ansible.builtin.file": {
+                    "follow": true,
+                    "group": "group",
+                    "mode": "0755",
+                    "owner": "user",
+                    "path": "/tmp/test",
+                    "recurse": false,
+                    "state": "string",
+                    "unsafe_writes": false
+                }
+            }
+        ]
+    },
+    "list files based on specific criteria": {
+        "tasks": [
+            {
+                "name": "Return a list of files based on specific criteria",
+                "ansible.builtin.find": {
+                    "age": "string",
+                    "age_stamp": "mtime",
+                    "contains": "string",
+                    "depth": "int",
+                    "excludes": [
+                        "element"
+                    ],
+                    "file_type": "file",
+                    "follow": false,
+                    "get_checksum": false,
+                    "hidden": false,
+                    "paths": [
+                        "element"
+                    ],
+                    "patterns": [
+                        "[]"
+                    ],
+                    "read_whole_file": false,
+                    "recurse": false,
+                    "size": "string",
+                    "use_regex": false
+                }
+            }
+        ]
+    },
+    "get gathers facts about remote hosts": {
+        "tasks": [
+            {
+                "name": "Gathers facts about remote hosts",
+                "ansible.builtin.gather_facts": {
+                    "parallel": false
+                }
+            }
+        ]
+    },
+    "download file from HTTP HTTPS FTP": {
+        "tasks": [
+            {
+                "name": "Download file from HTTP or HTTPS or FTP to node",
+                "ansible.builtin.get_url": {
+                    "backup": false,
+                    "decompress": true,
+                    "dest": "/tmp/test",
+                    "force": false,
+                    "group": "root",
+                    "mode": "0755",
+                    "owner": "root",
+                    "timeout": "10",
+                    "tmp_dest": "/tmp/test",
+                    "url": "string",
+                    "validate_certs": true
+                }
+            }
+        ]
+    },
+    "getent utility": {
+        "tasks": [
+            {
+                "name": "A wrapper to the unix getent utility",
+                "ansible.builtin.getent": {
+                    "database": "string",
+                    "fail_key": true,
+                    "key": "",
+                    "service": "string",
+                    "split": "string"
+                }
+            }
+        ]
+    },
+    "git checkout repository": {
+        "tasks": [
+            {
+                "name": "Deploy software (or files) from git checkouts",
+                "ansible.builtin.git": {
+                    "accept_hostkey": false,
+                    "accept_newhostkey": false,
+                    "archive": "/tmp/test",
+                    "archive_prefix": "string",
+                    "bare": false,
+                    "clone": true,
+                    "depth": "int",
+                    "dest": "/tmp/test",
+                    "executable": "/tmp/test",
+                    "force": false,
+                    "gpg_whitelist": [
+                        "[]"
+                    ],
+                    "key_file": "/tmp/test",
+                    "recursive": true,
+                    "reference": "value",
+                    "refspec": "string",
+                    "remote": "origin",
+                    "repo": "string",
+                    "separate_git_dir": "/tmp/test",
+                    "single_branch": false,
+                    "ssh_opts": "string",
+                    "track_submodules": false,
+                    "umask": "\"raw\"",
+                    "update": true,
+                    "verify_commit": false,
+                    "version": "HEAD"
+                }
+            }
+        ]
+    },
+    "add remove groups on a host": {
+        "tasks": [
+            {
+                "name": "Add or remove groups",
+                "ansible.builtin.group": {
+                    "gid": "int",
+                    "local": false,
+                    "name": "string",
+                    "non_unique": false,
+                    "state": "present",
+                    "system": false
+                }
+            }
+        ]
+    },
+    "create Ansible groups based on facts": {
+        "tasks": [
+            {
+                "name": "Create Ansible groups based on facts",
+                "ansible.builtin.group_by": {
+                    "key": "string",
+                    "parents": [
+                        "all"
+                    ]
+                }
+            }
+        ]
+    },
+    "set system hostname": {
+        "tasks": [
+            {
+                "name": "Manage hostname",
+                "ansible.builtin.hostname": {
+                    "name": "string",
+                    "use": "string"
+                }
+            }
+        ]
+    },
+    "import playbook": {
+        "tasks": [
+            {
+                "name": "Import a playbook",
+                "ansible.builtin.import_playbook": {
+                    "free-form": "value"
+                }
+            }
+        ]
+    },
+    "import role": {
+        "tasks": [
+            {
+                "name": "Import a role into a play",
+                "ansible.builtin.import_role": {
+                    "allow_duplicates": true,
+                    "defaults_from": "main",
+                    "handlers_from": "main",
+                    "name": "string",
+                    "rolespec_validate": true,
+                    "tasks_from": "main",
+                    "vars_from": "main"
+                }
+            }
+        ]
+    },
+    "import task": {
+        "tasks": [
+            {
+                "name": "Import a task list",
+                "ansible.builtin.import_tasks": {
+                    "file": "string",
+                    "free-form": "value"
+                }
+            }
+        ]
+    },
+    "include role": {
+        "tasks": [
+            {
+                "name": "Load and execute a role",
+                "ansible.builtin.include_role": {
+                    "allow_duplicates": true,
+                    "apply": "value",
+                    "defaults_from": "main",
+                    "handlers_from": "main",
+                    "name": "string",
+                    "public": false,
+                    "rolespec_validate": true,
+                    "tasks_from": "main",
+                    "vars_from": "main"
+                }
+            }
+        ]
+    },
+    "include task": {
+        "tasks": [
+            {
+                "name": "Dynamically include a task list",
+                "ansible.builtin.include_tasks": {
+                    "apply": "string",
+                    "file": "string",
+                    "free-form": "value"
+                }
+            }
+        ]
+    },
+    "include var": {
+        "tasks": [
+            {
+                "name": "Load variables from files, dynamically within a task",
+                "ansible.builtin.include_vars": {
+                    "depth": "0",
+                    "dir": "/tmp/test",
+                    "extensions": [
+                        "json",
+                        "yaml",
+                        "yml"
+                    ],
+                    "file": "/tmp/test",
+                    "files_matching": "string",
+                    "free-form": "value",
+                    "hash_behaviour": "None",
+                    "ignore_files": [
+                        "element"
+                    ],
+                    "ignore_unknown_extensions": false,
+                    "name": "string"
+                }
+            }
+        ]
+    },
+    "Configure iptables rules": {
+        "tasks": [
+            {
+                "name": "Modify iptables rules",
+                "ansible.builtin.iptables": {
+                    "action": "append",
+                    "chain": "string",
+                    "chain_management": false,
+                    "comment": "string",
+                    "ctstate": [
+                        "[]"
+                    ],
+                    "destination": "string",
+                    "destination_port": "string",
+                    "destination_ports": [
+                        "element"
+                    ],
+                    "dst_range": "string",
+                    "flush": false,
+                    "fragment": "string",
+                    "gateway": "string",
+                    "gid_owner": "string",
+                    "goto": "string",
+                    "icmp_type": "string",
+                    "in_interface": "string",
+                    "ip_version": "ipv4",
+                    "jump": "string",
+                    "limit": "string",
+                    "limit_burst": "string",
+                    "log_level": "string",
+                    "log_prefix": "string",
+                    "match": [
+                        "[]"
+                    ],
+                    "match_set": "string",
+                    "match_set_flags": "string",
+                    "out_interface": "string",
+                    "policy": "string",
+                    "protocol": "string",
+                    "reject_with": "string",
+                    "rule_num": "string",
+                    "set_counters": "string",
+                    "set_dscp_mark": "string",
+                    "set_dscp_mark_class": "string",
+                    "source": "string",
+                    "source_port": "string",
+                    "src_range": "string",
+                    "state": "present",
+                    "syn": "ignore",
+                    "table": "filter",
+                    "tcp_flags": "value",
+                    "to_destination": "string",
+                    "to_ports": "string",
+                    "to_source": "string",
+                    "uid_owner": "string",
+                    "wait": "string"
+                }
+            }
+        ]
+    },
+    "Add remove a host from known_hosts file": {
+        "tasks": [
+            {
+                "name": "Add or remove a host from the known_hosts file",
+                "ansible.builtin.known_hosts": {
+                    "hash_host": false,
+                    "key": "string",
+                    "name": "string",
+                    "path": "/tmp/test",
+                    "state": "present"
+                }
+            }
+        ]
+    },
+    "insert update line in a file": {
+        "tasks": [
+            {
+                "name": "Manage lines in text files",
+                "ansible.builtin.lineinfile": {
+                    "attributes": "string",
+                    "backrefs": false,
+                    "backup": false,
+                    "create": false,
+                    "firstmatch": false,
+                    "group": "string",
+                    "insertafter": "EOF",
+                    "insertbefore": "string",
+                    "line": "string",
+                    "mode": "0755",
+                    "others": "string",
+                    "owner": "string",
+                    "path": "/tmp/test",
+                    "regexp": "string",
+                    "search_string": "string",
+                    "selevel": "string",
+                    "serole": "string",
+                    "setype": "string",
+                    "seuser": "string",
+                    "state": "present",
+                    "unsafe_writes": false,
+                    "validate": "string"
+                }
+            }
+        ]
+    },
+    "meta task": {
+        "tasks": [
+            {
+                "name": "Execute Ansible 'actions'",
+                "ansible.builtin.meta": {
+                    "free_form": "value"
+                }
+            }
+        ]
+    },
+    "install update remove package": {
+        "tasks": [
+            {
+                "name": "Generic OS package manager",
+                "ansible.builtin.package": {
+                    "name": "value",
+                    "state": "value"
+                }
+            }
+        ]
+    },
+    "get installed packages as facts": {
+        "tasks": [
+            {
+                "name": "Package information as facts",
+                "ansible.builtin.package_facts": {
+                    "manager": [
+                        "auto"
+                    ],
+                    "strategy": "first"
+                }
+            }
+        ]
+    },
+    "make a pause": {
+        "tasks": [
+            {
+                "name": "Pause playbook execution",
+                "ansible.builtin.pause": {
+                    "echo": true,
+                    "minutes": "value",
+                    "prompt": "value",
+                    "seconds": "value"
+                }
+            }
+        ]
+    },
+    "try to connect to target host": {
+        "tasks": [
+            {
+                "name": "Try to connect to host, verify a usable python and return pong on success",
+                "ansible.builtin.ping": {
+                    "data": "pong"
+                }
+            }
+        ]
+    },
+    "install uninstall upgrade python library": {
+        "tasks": [
+            {
+                "name": "Manages Python library dependencies",
+                "ansible.builtin.pip": {
+                    "chdir": "/tmp/test",
+                    "extra_args": "string",
+                    "name": [
+                        "element"
+                    ],
+                    "requirements": "/file/path",
+                    "state": "present",
+                    "version": "string"
+                }
+            }
+        ]
+    },
+    "executes low-down and dirty ssh": {
+        "tasks": [
+            {
+                "name": "Executes a low-down and dirty command",
+                "ansible.builtin.raw": {
+                    "executable": "value",
+                    "free_form": "value"
+                }
+            }
+        ]
+    },
+    "reboot host": {
+        "tasks": [
+            {
+                "name": "Reboot the host",
+                "ansible.builtin.reboot": {
+                    "boot_time_command": "cat /proc/sys/kernel/random/boot_id",
+                    "connect_timeout": "int",
+                    "msg": "Reboot initiated by Ansible",
+                    "post_reboot_delay": "0",
+                    "pre_reboot_delay": "0",
+                    "reboot_command": "[determined based on target OS]",
+                    "reboot_timeout": "600",
+                    "search_paths": [
+                        "/sbin",
+                        "/bin",
+                        "/usr/sbin",
+                        "/usr/bin",
+                        "/usr/local/sbin"
+                    ],
+                    "test_command": "whoami"
+                }
+            }
+        ]
+    },
+    "replace pattern in a file": {
+        "tasks": [
+            {
+                "name": "Replace all instances of a particular string in a file using a back-referenced regular expression",
+                "ansible.builtin.replace": {
+                    "after": "string",
+                    "attributes": "string",
+                    "backup": false,
+                    "before": "string",
+                    "encoding": "utf-8",
+                    "group": "string",
+                    "mode": "0755",
+                    "others": "string",
+                    "owner": "string",
+                    "path": "/tmp/test",
+                    "regexp": "string",
+                    "replace": "string",
+                    "selevel": "string",
+                    "serole": "string",
+                    "setype": "string",
+                    "seuser": "string",
+                    "unsafe_writes": false,
+                    "validate": "string"
+                }
+            }
+        ]
+    },
+    "adds or removes rpm gpg key": {
+        "tasks": [
+            {
+                "name": "Adds or removes a gpg key from the rpm db",
+                "ansible.builtin.rpm_key": {
+                    "fingerprint": "string",
+                    "key": "string",
+                    "state": "present",
+                    "validate_certs": true
+                }
+            }
+        ]
+    },
+    "copy execute script on remote node": {
+        "tasks": [
+            {
+                "name": "Runs a local script on a remote node after transferring it",
+                "ansible.builtin.script": {
+                    "chdir": "value",
+                    "cmd": "string",
+                    "creates": "value",
+                    "decrypt": true,
+                    "executable": "value",
+                    "free_form": "value",
+                    "removes": "value"
+                }
+            }
+        ]
+    },
+    "stop start enable service on remote hosts": {
+        "tasks": [
+            {
+                "name": "Manage services",
+                "ansible.builtin.service": {
+                    "arguments": "string",
+                    "enabled": false,
+                    "name": "string",
+                    "pattern": "string",
+                    "runlevel": "default",
+                    "sleep": "int",
+                    "state": "string",
+                    "use": "auto"
+                }
+            }
+        ]
+    },
+    "get state information of services as facts": {
+        "tasks": [
+            {
+                "name": "Return service state information as fact data",
+                "ansible.builtin.service_facts": {}
+            }
+        ]
+    },
+    "set variable": {
+        "tasks": [
+            {
+                "name": "Set host variable(s) and fact(s)",
+                "ansible.builtin.set_fact": {
+                    "cacheable": false,
+                    "key_value": "value"
+                }
+            }
+        ]
+    },
+    "define and display stat current ansible run": {
+        "tasks": [
+            {
+                "name": "Define and display stats for the current ansible run",
+                "ansible.builtin.set_stats": {
+                    "aggregate": true,
+                    "data": "value",
+                    "per_host": false
+                }
+            }
+        ]
+    },
+    "Get fact from target host": {
+        "tasks": [
+            {
+                "name": "Gathers facts about remote hosts",
+                "ansible.builtin.setup": {
+                    "fact_path": "/tmp/test",
+                    "filter": [
+                        "[]"
+                    ],
+                    "gather_subset": [
+                        "all"
+                    ],
+                    "gather_timeout": "10"
+                }
+            }
+        ]
+    },
+    "execute shell command name": {
+        "tasks": [
+            {
+                "name": "Execute shell commands on targets",
+                "ansible.builtin.shell": {
+                    "chdir": "/tmp/test",
+                    "cmd": "string",
+                    "creates": "/tmp/test",
+                    "executable": "/tmp/test",
+                    "free_form": "string",
+                    "removes": "/tmp/test",
+                    "stdin": "string",
+                    "stdin_add_newline": true
+                }
+            }
+        ]
+    },
+    "slurp a file from remote nodes": {
+        "tasks": [
+            {
+                "name": "Slurps a file from remote nodes",
+                "ansible.builtin.slurp": {
+                    "src": "/tmp/test"
+                }
+            }
+        ]
+    },
+    "get stat of a file as facts": {
+        "tasks": [
+            {
+                "name": "retrieve file or file system status",
+                "ansible.builtin.stat": {
+                    "checksum_algorithm": "sha1",
+                    "follow": false,
+                    "get_attributes": true,
+                    "get_checksum": true,
+                    "get_mime": true,
+                    "path": "/tmp/test"
+                }
+            }
+        ]
+    },
+    "checkout subversion": {
+        "tasks": [
+            {
+                "name": "Deploys a subversion repository",
+                "ansible.builtin.subversion": {
+                    "checkout": true,
+                    "dest": "/tmp/test",
+                    "executable": "/tmp/test",
+                    "export": false,
+                    "force": false,
+                    "in_place": false,
+                    "password": "string",
+                    "repo": "string",
+                    "revision": "HEAD",
+                    "switch": true,
+                    "update": true,
+                    "username": "string",
+                    "validate_certs": false
+                }
+            }
+        ]
+    },
+    "start stop systemd units": {
+        "tasks": [
+            {
+                "name": "Manage systemd units",
+                "ansible.builtin.systemd_service": {
+                    "daemon_reexec": false,
+                    "daemon_reload": false,
+                    "enabled": false,
+                    "force": false,
+                    "masked": false,
+                    "name": "string",
+                    "no_block": false,
+                    "scope": "system",
+                    "state": "string"
+                }
+            }
+        ]
+    },
+    "start stop sysv init system": {
+        "tasks": [
+            {
+                "name": "Manage SysV services",
+                "ansible.builtin.sysvinit": {
+                    "arguments": "string",
+                    "daemonize": false,
+                    "enabled": false,
+                    "name": "string",
+                    "pattern": "string",
+                    "runlevels": [
+                        "element"
+                    ],
+                    "sleep": "1",
+                    "state": "string"
+                }
+            }
+        ]
+    },
+    "create temp file": {
+        "tasks": [
+            {
+                "name": "Creates temporary files and directories",
+                "ansible.builtin.tempfile": {
+                    "path": "/tmp/test",
+                    "prefix": "ansible",
+                    "state": "file",
+                    "suffix": ""
+                }
+            }
+        ]
+    },
+    "template a file out to a target host": {
+        "tasks": [
+            {
+                "name": "Template a file out to a target host",
+                "ansible.builtin.template": {
+                    "attributes": "string",
+                    "backup": false,
+                    "block_end_string": "%}",
+                    "block_start_string": "{%",
+                    "comment_end_string": "string",
+                    "comment_start_string": "string",
+                    "dest": "/tmp/test",
+                    "follow": false,
+                    "force": true,
+                    "group": "string",
+                    "lstrip_blocks": false,
+                    "mode": "0755",
+                    "newline_sequence": "\\n",
+                    "output_encoding": "utf-8",
+                    "owner": "string",
+                    "selevel": "string",
+                    "serole": "string",
+                    "setype": "string",
+                    "seuser": "string",
+                    "src": "/tmp/test",
+                    "trim_blocks": true,
+                    "unsafe_writes": false,
+                    "validate": "string",
+                    "variable_end_string": "}}",
+                    "variable_start_string": "{{"
+                }
+            }
+        ]
+    },
+    "unpack unarchive archive file": {
+        "tasks": [
+            {
+                "name": "Unpacks an archive after (optionally) copying it from the local machine",
+                "ansible.builtin.unarchive": {
+                    "attributes": "string",
+                    "copy": true,
+                    "creates": "/tmp/test",
+                    "decrypt": true,
+                    "dest": "/tmp/test",
+                    "exclude": [
+                        "[]"
+                    ],
+                    "extra_opts": [
+                        ""
+                    ],
+                    "group": "string",
+                    "include": [
+                        "[]"
+                    ],
+                    "io_buffer_size": "65536",
+                    "keep_newer": false,
+                    "list_files": false,
+                    "mode": "0755",
+                    "owner": "string",
+                    "remote_src": false,
+                    "selevel": "string",
+                    "serole": "string",
+                    "setype": "string",
+                    "seuser": "string",
+                    "src": "/tmp/test",
+                    "unsafe_writes": false,
+                    "validate_certs": true
+                }
+            }
+        ]
+    },
+    "Interact with webservices": {
+        "tasks": [
+            {
+                "name": "Interacts with webservices",
+                "ansible.builtin.uri": {
+                    "attributes": "string",
+                    "body": "\"raw\"",
+                    "body_format": "raw",
+                    "ca_path": "/tmp/test",
+                    "ciphers": [
+                        "element"
+                    ],
+                    "client_cert": "/tmp/test",
+                    "client_key": "/tmp/test",
+                    "creates": "/tmp/test",
+                    "decompress": true,
+                    "dest": "/tmp/test",
+                    "follow_redirects": "safe",
+                    "force": false,
+                    "force_basic_auth": false,
+                    "group": "string",
+                    "headers": "value",
+                    "http_agent": "ansible-httpget",
+                    "method": "GET",
+                    "mode": "0755",
+                    "owner": "string",
+                    "remote_src": false,
+                    "removes": "/tmp/test",
+                    "return_content": false,
+                    "selevel": "string",
+                    "serole": "string",
+                    "setype": "string",
+                    "seuser": "string",
+                    "src": "/tmp/test",
+                    "status_code": [
+                        "[200]"
+                    ],
+                    "timeout": "30",
+                    "unix_socket": "/tmp/test",
+                    "unredirected_headers": [
+                        "[]"
+                    ],
+                    "unsafe_writes": false,
+                    "url": "string",
+                    "url_password": "string",
+                    "url_username": "string",
+                    "use_gssapi": false,
+                    "use_netrc": true,
+                    "use_proxy": true,
+                    "validate_certs": true
+                }
+            }
+        ]
+    },
+    "add remove set user account attribute": {
+        "tasks": [
+            {
+                "name": "Manage user accounts",
+                "ansible.builtin.user": {
+                    "append": false,
+                    "authorization": "string",
+                    "comment": "string",
+                    "create_home": true,
+                    "expires": "value",
+                    "force": false,
+                    "generate_ssh_key": false,
+                    "group": "string",
+                    "groups": [
+                        "element"
+                    ],
+                    "hidden": false,
+                    "home": "/tmp/test",
+                    "local": false,
+                    "login_class": "string",
+                    "move_home": false,
+                    "name": "string",
+                    "non_unique": false,
+                    "password": "string",
+                    "password_expire_max": "int",
+                    "password_expire_min": "int",
+                    "password_lock": false,
+                    "profile": "string",
+                    "remove": false,
+                    "role": "string",
+                    "seuser": "string",
+                    "shell": "string",
+                    "skeleton": "string",
+                    "ssh_key_bits": "int",
+                    "ssh_key_comment": "ansible-generated on HOSTNAME",
+                    "ssh_key_file": "/tmp/test",
+                    "ssh_key_passphrase": "string",
+                    "ssh_key_type": "rsa",
+                    "state": "present",
+                    "system": false,
+                    "uid": "int",
+                    "umask": "string",
+                    "update_password": "always"
+                }
+            }
+        ]
+    },
+    "validate arguments with argument specification": {
+        "tasks": [
+            {
+                "name": "Validate role argument specs",
+                "ansible.builtin.validate_argument_spec": {
+                    "argument_spec": "value",
+                    "provided_arguments": "value"
+                }
+            }
+        ]
+    },
+    "wait for condition port before continuing": {
+        "tasks": [
+            {
+                "name": "Waits for a condition before continuing",
+                "ansible.builtin.wait_for": {
+                    "active_connection_states": [
+                        "ESTABLISHED",
+                        "FIN_WAIT1",
+                        "FIN_WAIT2",
+                        "SYN_RECV",
+                        "SYN_SENT",
+                        "TIME_WAIT"
+                    ],
+                    "connect_timeout": "5",
+                    "delay": "0",
+                    "exclude_hosts": [
+                        "element"
+                    ],
+                    "host": "127.0.0.1",
+                    "msg": "string",
+                    "path": "/tmp/test",
+                    "port": "80",
+                    "search_regex": "string",
+                    "sleep": "1",
+                    "state": "started",
+                    "timeout": "300"
+                }
+            }
+        ]
+    },
+    "wait until remote system is reachable usable": {
+        "tasks": [
+            {
+                "name": "Waits until remote system is reachable/usable",
+                "ansible.builtin.wait_for_connection": {
+                    "connect_timeout": "5",
+                    "delay": "0",
+                    "sleep": "1",
+                    "timeout": "600"
+                }
+            }
+        ]
+    },
+    "install upgrade, downgrade remove and list package with yum": {
+        "tasks": [
+            {
+                "name": "Manages packages with the yum package manager",
+                "ansible.builtin.yum": {
+                    "allow_downgrade": false,
+                    "autoremove": false,
+                    "bugfix": false,
+                    "cacheonly": false,
+                    "conf_file": "string",
+                    "disable_excludes": "string",
+                    "disable_gpg_check": false,
+                    "disable_plugin": [
+                        "element"
+                    ],
+                    "disablerepo": [
+                        "element"
+                    ],
+                    "download_dir": "string",
+                    "download_only": false,
+                    "enable_plugin": [
+                        "element"
+                    ],
+                    "enablerepo": [
+                        "element"
+                    ],
+                    "exclude": [
+                        "element"
+                    ],
+                    "install_repoquery": true,
+                    "install_weak_deps": true,
+                    "installroot": "/",
+                    "list": "string",
+                    "lock_timeout": "30",
+                    "name": [
+                        "element"
+                    ],
+                    "releasever": "string",
+                    "security": false,
+                    "skip_broken": false,
+                    "sslverify": true,
+                    "state": "string",
+                    "update_cache": false,
+                    "update_only": false,
+                    "use_backend": "auto",
+                    "validate_certs": true
+                }
+            }
+        ]
+    },
+    "add or remove yum repositories": {
+        "tasks": [
+            {
+                "name": "Add or remove YUM repositories",
+                "ansible.builtin.yum_repository": {
+                    "async": false,
+                    "attributes": "string",
+                    "bandwidth": "0",
+                    "baseurl": [
+                        "element"
+                    ],
+                    "cost": "1000",
+                    "deltarpm_metadata_percentage": "100",
+                    "deltarpm_percentage": "75",
+                    "description": "string",
+                    "enabled": false,
+                    "enablegroups": false,
+                    "exclude": [
+                        "element"
+                    ],
+                    "failovermethod": "roundrobin",
+                    "file": "string",
+                    "gpgcakey": "string",
+                    "gpgcheck": false,
+                    "gpgkey": [
+                        "element"
+                    ],
+                    "group": "string",
+                    "http_caching": "all",
+                    "include": "string",
+                    "includepkgs": [
+                        "element"
+                    ],
+                    "ip_resolve": "whatever",
+                    "keepalive": false,
+                    "keepcache": "1",
+                    "metadata_expire": "21600",
+                    "metadata_expire_filter": "read-only:present",
+                    "metalink": "string",
+                    "mirrorlist": "string",
+                    "mirrorlist_expire": "21600",
+                    "mode": "0755",
+                    "module_hotfixes": false,
+                    "name": "string",
+                    "owner": "string",
+                    "password": "string",
+                    "priority": "99",
+                    "protect": false,
+                    "proxy": "string",
+                    "proxy_password": "string",
+                    "proxy_username": "string",
+                    "repo_gpgcheck": false,
+                    "reposdir": "/tmp/test",
+                    "retries": "10",
+                    "s3_enabled": false,
+                    "selevel": "string",
+                    "serole": "string",
+                    "setype": "string",
+                    "seuser": "string",
+                    "skip_if_unavailable": false,
+                    "ssl_check_cert_permissions": false,
+                    "sslcacert": "string",
+                    "sslclientcert": "string",
+                    "sslclientkey": "string",
+                    "sslverify": true,
+                    "state": "present",
+                    "throttle": "string",
+                    "timeout": "30",
+                    "ui_repoid_vars": "releasever basearch",
+                    "unsafe_writes": false,
+                    "username": "string"
+                }
+            }
+        ]
+    }
+}

@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "ansible-aisnippet"
+version = "0.1.0"
+description = "Ansible-aisnippet Generate ansible tasks with ChatGPT."
+authors = ["Stephane ROBERT <robert.stephane.28@gmail.com>"]
+readme = "README.md"
+include = [
+    "LICENSE",
+]
+homepage = "https://blog.stephane-robert.info/"
+repository = "https://github.com/stephrobert/ansible-aisnippet"
+keywords = ["ansible", "module", "ChatGPT"]
+
+[tool.poetry.scripts]
+ansible-aisnippet = "ansible_aisnippet.main:app"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+typer = {extras = ["all"], version = "^0.6.1"}
+Jinja2 = "^3.1.2"
+"ruamel.yaml" = "^0.17.21"
+rich = "^12.6.0"
+gensim = "^4.3.1"
+jieba = "^0.42.1"
+openai = "^0.27.2"
+importlib-metadata = "^4.12.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+black = "^22.6.0"
+
+[tool.poetry.group.dev.dependencies]
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+

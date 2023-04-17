@@ -1,0 +1,46 @@
+- name: Playbook generated with chatgpt
+  hosts: all
+  gather_facts: true
+  tasks:
+  - name: Install package htop, nginx and net-tools
+    ansible.builtin.yum:
+        name:
+        - htop
+        - nginx
+        - net-tools
+        state: present
+  - name: Copy file from local file /tmp/toto to remote /tmp/titi
+    ansible.builtin.copy:
+        src: /tmp/toto
+        dest: /tmp/titi
+        mode: '0666'
+        owner: bob
+        group: www
+    register: test
+  - name: A block
+    when: test.rc == 0
+    block:
+    - name: Wait for port 6300 on localhost timeout 25
+      ansible.builtin.wait_for:
+          host: 127.0.0.1
+          port: '6300'
+          timeout: '25'
+    rescue:
+    - name: Execute command /opt/application/start.sh creates /var/run/test.lock
+      ansible.builtin.command:
+          chdir: /tmp/test
+          cmd: /opt/application/start.sh
+          creates: /var/run/test.lock
+  - name: Download file from https://tmp.io/test/
+    ansible.builtin.get_url:
+        backup: false
+        decompress: true
+        dest: /tmp/test
+        force: true
+        group: root
+        mode: '0640'
+        owner: root
+        timeout: '10'
+        tmp_dest: /tmp/test
+        url: https://tmp.io/test/
+        validate_certs: true
