@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ansible-aisnippet"
-version = "0.1.0"
+version = "0.1.1"
 description = "Ansible-aisnippet Generate ansible tasks with ChatGPT."
 authors = ["Stephane ROBERT <robert.stephane.28@gmail.com>"]
 readme = "README.md"
