@@ -18,7 +18,7 @@ ansible-aisnippet = "ansible_aisnippet.main:app"
 python = "^3.10"
 typer = {extras = ["all"], version = "^0.7.0"}
 Jinja2 = "^3.1.2"
-"ruamel.yaml" = "^0.17.21"
+"ruamel.yaml" = "^0.18.0"
 rich = "^12.6.0"
 gensim = "^4.3.1"
 jieba = "^0.42.1"
